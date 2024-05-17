@@ -25,7 +25,7 @@ const HomepageScreen = ({ navigation }: { navigation: any }) => {
 
   const handleCirclePress = () => {
     Linking.openURL(
-      "http://192.168.86.41:8000/en-US/app/apple_health/mindscape_dashboard"
+      "http://10.18.89.186:8000/en-US/app/apple_health/mindscape_dashboard"
     );
   };
 

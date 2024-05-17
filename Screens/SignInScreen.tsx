@@ -1,17 +1,15 @@
 import React, { useState } from "react";
-import {
-  View,
-  SafeAreaView,
-  TouchableOpacity,
-  StatusBar,
-} from "react-native";
+import { View, SafeAreaView, TouchableOpacity, StatusBar } from "react-native";
 import { Text, TextInput } from "react-native-paper";
 import { applicationTheme } from "./appTheme";
 import CustomButton from "../Components/CustomButton";
 import { FIREBASE_AUTH } from "../FirebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useUser } from "../UserContext";
 
-const LoginScreen = (props: { navigation: { navigate: (arg0: string) => void; }; }) => {
+const LoginScreen = (props: {
+  navigation: { navigate: (arg0: string) => void };
+}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -33,8 +31,8 @@ const LoginScreen = (props: { navigation: { navigate: (arg0: string) => void; };
         password
       );
       console.log("User signed in:", response.user);
-      props.navigation.navigate("OnboardFirstScreen");
-    } catch (error) {  
+      props.navigation.navigate("HomepageScreen");
+    } catch (error) {
       setError("Login failed. Please check your credentials and try again.");
     } finally {
       setIsLoading(false);
@@ -64,14 +62,17 @@ const LoginScreen = (props: { navigation: { navigate: (arg0: string) => void; };
           placeholder="E-mail"
           onChangeText={(text) => setEmail(text)}
           value={email}
-          autoCapitalize="none" // Prevent auto-capitalization for emails
+          style={applicationTheme.textInput}
+          autoCapitalize="none"
+          underlineColor="transparent" // Set underline color to transparent
+          activeUnderlineColor="#153D45" // Color when focused // Prevent auto-capitalization for emails
         />
         <TextInput
           placeholder="Password"
           onChangeText={(text) => setPassword(text)}
           value={password}
           secureTextEntry={true}
-          style={{ marginBottom: 56 }}
+          style={[applicationTheme.textInput, { marginBottom: 56 }]}
         />
 
         {isLoading ? (
@@ -82,9 +83,7 @@ const LoginScreen = (props: { navigation: { navigate: (arg0: string) => void; };
           <CustomButton onPress={handleSignInPress} text="Sign In" />
         )}
 
-        {error && (
-          <Text style={{ color: "red" }}>{error}</Text>
-        )}
+        {error && <Text style={{ color: "red" }}>{error}</Text>}
 
         <View style={applicationTheme.container}>
           <View style={applicationTheme.fotterTextAlign}>

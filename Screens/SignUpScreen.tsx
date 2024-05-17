@@ -79,6 +79,7 @@ const SignUpScreen = ({ navigation }: { navigation: any }) => {
           keyboardType="email-address"
           placeholder="E-mail"
           style={applicationTheme.textInput}
+          autoCapitalize="none"
           underlineColor="transparent" // Set underline color to transparent
           activeUnderlineColor="#153D45" // Color when focused
         />
@@ -94,6 +95,7 @@ const SignUpScreen = ({ navigation }: { navigation: any }) => {
               onPress={handlePasswordVisibility}
             />
           }
+          autoCapitalize="none"
           style={applicationTheme.textInput}
           underlineColor="transparent" // Set underline color to transparent
           activeUnderlineColor="#153D45" // Color when focused
